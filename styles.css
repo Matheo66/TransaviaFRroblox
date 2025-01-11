@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50; /* vert principal */
+    background-color: #4CAF50; /* vert */
     color: white;
     text-align: center;
     padding: 20px;
@@ -39,23 +39,90 @@ section {
 }
 
 /* Style spécifique pour la page 'vols.html' */
-body.vols-page {
-    background-color: #dcedc8; /* fond vert très clair */
-}
-
-section ul {
-    list-style-type: none;
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-section ul li {
-    margin: 10px 0;
+/* Section des vols */
+section {
+    padding: 40px;
+    text-align: center;
+    background-color: #e8f5e9;
+    margin-top: 120px; /* pour éviter que le contenu soit caché derrière l'en-tête */
+}
+
+section h2 {
+    font-size: 24px;
+    color: #388e3c;
+}
+
+section p {
     font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Conteneur pour chaque vol */
+.vol-container {
+    display: inline-block;
+    margin: 15px;
+    text-align: center;
+}
+
+/* Style des boutons de vol */
+.vol-btn {
+    background-color: #388e3c;
+    color: white;
+    font-size: 18px;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.vol-btn:hover {
+    background-color: #2c6e2f;
+}
+
+.vol-btn .destination {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.vol-btn .horaire {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Style du bouton réserver */
+.btn-reserver {
+    background-color: #388e3c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-reserver:hover {
+    background-color: #2c6e2f;
 }
 
 /* Style spécifique pour la page 'candidature.html' */
 body.candidature-page {
-    background-color: #c8e6c9; /* fond vert pastel */
+    background-color: #e1f5fe; /* fond bleu clair */
 }
 
 form {
@@ -81,21 +148,35 @@ form input, form textarea, form button {
 }
 
 form button {
-    background-color: #388e3c; /* bouton vert foncé */
+    background-color: #4CAF50; /* bouton vert */
     color: white;
     border: none;
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #2c6e2f;
+    background-color: #45a049;
 }
 
 /* Style spécifique pour la page 'staff.html' */
 body.staff-page {
-    background-color: #a5d6a7; /* fond vert clair */
+    background-color: #fff3e0; /* fond orange clair */
 }
 
 form input[type="password"] {
     background-color: #fafafa;
+}
+
+.form-container {
+    display: flex;                /* Active le modèle Flexbox pour le conteneur */
+    justify-content: center;      /* Centre horizontalement le formulaire */
+    align-items: center;          /* Centre verticalement le formulaire */
+    height: 70vh;                /* Donne une hauteur de 100% de la fenêtre du navigateur (c'est-à-dire la hauteur de la page) */
+}
+
+iframe {
+    border: none;                 /* Enlève les bordures de l'iframe */
+    width: 100%;                  /* Le formulaire prendra 100% de la largeur de son conteneur */
+    max-width: 640px;             /* La largeur du formulaire ne dépassera pas 640px */
+    height: 880px;                /* Définissez la hauteur du formulaire */
 }
