@@ -6,10 +6,9 @@
     <title>Prochains Vols - TransaviaFRroblox</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="vols-page">
+<body>
     <header>
         <h1>Bienvenue sur Transavia FR roblox</h1>
-        <!-- Menu de navigation -->
         <nav>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
@@ -19,40 +18,20 @@
             </ul>
         </nav>
     </header>
-    <header>
-        <h1>Prochains Vols</h1>
-    </header>
 
-    <!-- Section des vols -->
     <section>
         <h2>Réservez votre vol</h2>
         <p>Consultez les prochains vols disponibles ci-dessous. Cliquez sur un vol pour réserver.</p>
 
-        <!-- Vol 1 -->
         <div class="vol-container">
             <button class="vol-btn">
-                <span class="destination">Perpignan</span><br>
-                <span class="horaire">18:00</span>
+                <span class="destination">Perpignan</span>
+                <span class="destination">- Lorient</span><br>
+                <span class="horaire">Départ</span>
+                <span class="horaire">17:00</span>
             </button>
-            <a href="reservation.html?vol=1" class="btn-reserver">Réserver</a>
-        </div>
-
-        <!-- Vol 2 -->
-        <div class="vol-container">
-            <button class="vol-btn">
-                <span class="destination">Lyon</span><br>
-                <span class="horaire">12:30</span>
-            </button>
-            <a href="reservation.html?vol=2" class="btn-reserver">Réserver</a>
-        </div>
-
-        <!-- Vol 3 -->
-        <div class="vol-container">
-            <button class="vol-btn">
-                <span class="destination">Marseille</span><br>
-                <span class="horaire">15:00</span>
-            </button>
-            <a href="reservation.html?vol=3" class="btn-reserver">Réserver</a>
+            <!-- Redirection vers la page de confirmation -->
+            <a href="confirmation.html?vol=1&destination=Perpignan-Lorient&heure=17:00" class="btn-reserver">Réserver</a>
         </div>
     </section>
 </body>

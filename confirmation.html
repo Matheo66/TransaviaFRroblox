@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de Réservation - TransaviaFRroblox</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Confirmation de Réservation</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="vols.html">Prochains Vols</a></li>
+                <li><a href="candidature.html">Postuler</a></li>
+                <li><a href="staff.html">Accès Staff</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Vous avez sélectionné le vol :</h2>
+        <p id="reservation-details"></p>
+
+        <h3>Voulez-vous confirmer votre réservation ?</h3>
+
+        <!-- Boutons de confirmation -->
+        <button id="yesButton">Oui</button>
+        <button id="noButton">Non</button>
+    </section>
+
+    <footer>
+        <p>© 2025 Transavia. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Récupérer les paramètres de l'URL (vol, destination, heure)
+        const urlParams = new URLSearchParams(window.location.search);
+        const vol = urlParams.get('vol');
+        const destination = urlParams.get('destination');
+        const heure = urlParams.get('heure');
+
+        // Afficher les détails de la réservation
+        if (destination && heure) {
+            document.getElementById('reservation-details').innerHTML = `
+                <p>Vol : ${destination}</p>
+                <p>Heure de départ : ${heure}</p>
+            `;
+        } else {
+            document.getElementById('reservation-details').innerHTML = `
+                <p>Détails du vol non disponibles.</p>
+            `;
+        }
+
+        // Quand l'utilisateur clique sur "Oui", il sera redirigé vers une page de confirmation
+        document.getElementById('yesButton').addEventListener('click', function() {
+            window.location.href = "resultat.html"; // Redirige vers une page de confirmation
+        });
+
+        // Quand l'utilisateur clique sur "Non", il sera redirigé vers la page des prochains vols
+        document.getElementById('noButton').addEventListener('click', function() {
+            window.location.href = "vols.html"; // Redirige vers la page des prochains vols
+        });
+    </script>
+</body>
+</html>
