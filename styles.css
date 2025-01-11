@@ -1,128 +1,101 @@
+/* Styles globaux (qui seront appliqués à toutes les pages) */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* fond clair */
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
-    background-color: #003580;
+    background-color: #4CAF50; /* vert principal */
     color: white;
-    padding: 10px 0;
     text-align: center;
+    padding: 20px;
+}
+
+h1, h2 {
+    margin: 0;
 }
 
 nav ul {
     list-style-type: none;
-    margin: 0;
     padding: 0;
 }
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin-right: 20px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 18px;
 }
 
 section {
-    margin: 20px;
     padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    color: #003580;
+/* Style spécifique pour la page 'vols.html' */
+body.vols-page {
+    background-color: #dcedc8; /* fond vert très clair */
 }
 
-footer {
-    background-color: #003580;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Style de la section des prochains vols */
-#vols {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#vols ul {
+section ul {
     list-style-type: none;
     padding: 0;
 }
 
-#vols ul li {
-    margin-bottom: 10px;
+section ul li {
+    margin: 10px 0;
+    font-size: 18px;
 }
 
-/* Style de la section de candidature */
-#candidature {
-    background-color: #f9f9f9;
+/* Style spécifique pour la page 'candidature.html' */
+body.candidature-page {
+    background-color: #c8e6c9; /* fond vert pastel */
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 5px;
-    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-#candidature label {
-    font-weight: bold;
+form label {
+    display: block;
+    margin: 10px 0 5px;
 }
 
-#candidature input, #candidature textarea {
+form input, form textarea, form button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
-#candidature button {
-    padding: 10px 20px;
-    background-color: #003580;
+form button {
+    background-color: #388e3c; /* bouton vert foncé */
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
 }
 
-/* Style de la section staff */
-#staff {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 30px;
+form button:hover {
+    background-color: #2c6e2f;
 }
 
-#staff label {
-    font-weight: bold;
+/* Style spécifique pour la page 'staff.html' */
+body.staff-page {
+    background-color: #a5d6a7; /* fond vert clair */
 }
 
-#staff input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+form input[type="password"] {
+    background-color: #fafafa;
 }
-
-#staff button {
-    padding: 10px 20px;
-    background-color: #003580;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
