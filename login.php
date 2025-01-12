@@ -5,12 +5,16 @@ $username = "root";         // ton nom d'utilisateur MySQL
 $password = "";             // ton mot de passe MySQL (vide par défaut sous XAMPP)
 $dbname = "transavia";      // Nom de ta base de données
 
+// Créer la connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Vérifier la connexion
 if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
+
+// Démarrer la session si ce n'est pas déjà fait
+session_start();
 
 // Vérifier si les champs du formulaire existent
 if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -26,8 +30,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // Connexion réussie, récupérer les infos de l'utilisateur
         $row = $result->fetch_assoc();
         
-        // Démarrer la session et stocker les informations
-        session_start();
+        // Stocker les informations dans la session
         $_SESSION['username'] = $nom_utilisateur;
         $_SESSION['nom'] = $row['nom'];
         $_SESSION['prenom'] = $row['prenom'];
@@ -35,7 +38,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         // Rediriger vers le tableau de bord staff
         header("Location: staff_dashboard.php");
-        exit();
+        exit();  // S'assurer que le script s'arrête après la redirection
     } else {
         echo "Nom d'utilisateur ou mot de passe incorrect.";
     }
