@@ -25,18 +25,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Préparer la requête pour insérer l'inscription du staff au vol
+    // Vérifier si l'utilisateur est déjà inscrit à ce vol
     $nom_utilisateur = $_SESSION['username'];
 
-    // Ajouter l'inscription à la table des réservations (ou créer une table spécifique)
-    $sql = "INSERT INTO reservations (nom_utilisateur, vol) VALUES ('$nom_utilisateur', '$vol')";
+    $check_sql = "SELECT * FROM reservations WHERE nom_utilisateur = '$nom_utilisateur' AND vol = '$vol'";
+    $check_result = $conn->query($check_sql);
 
-    if ($conn->query($sql) === TRUE) {
-        // Inscription réussie
-        $_SESSION['inscription_message'] = "Vous êtes inscrit au vol : $vol.";
+    if ($check_result->num_rows > 0) {
+        // L'utilisateur est déjà inscrit à ce vol
+        $_SESSION['inscription_message'] = "Vous êtes déjà inscrit à ce vol.";
     } else {
-        // Une erreur est survenue
-        $_SESSION['inscription_message'] = "Une erreur est survenue lors de l'inscription. Veuillez réessayer.";
+        // L'utilisateur n'est pas inscrit, on peut procéder à l'inscription
+        $sql = "INSERT INTO reservations (nom_utilisateur, vol) VALUES ('$nom_utilisateur', '$vol')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Inscription réussie
+            $_SESSION['inscription_message'] = "Vous êtes inscrit au vol : $vol.";
+        } else {
+            // Une erreur est survenue
+            $_SESSION['inscription_message'] = "Une erreur est survenue lors de l'inscription. Veuillez réessayer.";
+        }
     }
 
     // Fermer la connexion à la base de données

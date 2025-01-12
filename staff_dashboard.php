@@ -39,7 +39,7 @@ if (!isset($_SESSION['username'])) {
             <label for="vol">Sélectionnez un vol :</label>
             <select name="vol" id="vol" required>
                 <option value="Perpignan-Lorient">Perpignan - Lorient</option>
-                <option value="Paris-Nice">Paris - Nice</option>
+                
                 <!-- Ajoute ici d'autres vols disponibles -->
             </select>
             <br><br>
