@@ -7,25 +7,43 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Récupérer les données du formulaire
-$vol = $_POST['vol'];
-$nom = $_SESSION['nom'];
-$prenom = $_SESSION['prenom'];
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer le vol sélectionné
+    $vol = $_POST['vol'];
 
-// Simuler l'envoi d'un email à l'administrateur (remplace avec ton adresse email)
-$to = "tonemail@example.com";  // Remplace par ton email
-$subject = "Nouvelle inscription au vol";
-$message = "Le staff membre $prenom $nom s'est inscrit au vol $vol.";
-$headers = "From: noreply@transaviafrroblox.com";
+    // Connexion à la base de données
+    $servername = "localhost";
+    $username = "root";  // Remplace par ton utilisateur
+    $password = "";      // Remplace par ton mot de passe
+    $dbname = "transavia";  // Remplace par le nom de ta base de données
 
-// Envoyer l'email
-if (mail($to, $subject, $message, $headers)) {
-    $_SESSION['inscription_message'] = "Inscription réussie pour le vol $vol !";
-} else {
-    $_SESSION['inscription_message'] = "Une erreur est survenue lors de l'inscription. Veuillez réessayer.";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Vérifier la connexion
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Préparer la requête pour insérer l'inscription du staff au vol
+    $nom_utilisateur = $_SESSION['username'];
+
+    // Ajouter l'inscription à la table des réservations (ou créer une table spécifique)
+    $sql = "INSERT INTO reservations (nom_utilisateur, vol) VALUES ('$nom_utilisateur', '$vol')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Inscription réussie
+        $_SESSION['inscription_message'] = "Vous êtes inscrit au vol : $vol.";
+    } else {
+        // Une erreur est survenue
+        $_SESSION['inscription_message'] = "Une erreur est survenue lors de l'inscription. Veuillez réessayer.";
+    }
+
+    // Fermer la connexion à la base de données
+    $conn->close();
 }
 
-// Rediriger vers le tableau de bord staff
+// Rediriger vers le tableau de bord après avoir traité l'inscription
 header("Location: staff_dashboard.php");
 exit();
 ?>

@@ -22,7 +22,6 @@ if (!isset($_SESSION['username'])) {
         <nav>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="vols.html">Prochains Vols</a></li>
                 <li><a href="logout.php">Déconnexion</a></li>
             </ul>
         </nav>
@@ -32,16 +31,16 @@ if (!isset($_SESSION['username'])) {
         <h2>Bienvenue, <?php echo $_SESSION['prenom'] . " " . $_SESSION['nom']; ?> !</h2>
         <p>Rang : <?php echo $_SESSION['rang']; ?></p>
 
-        <h3>Inscription aux vols</h3>
-        <p>Voici la liste des prochains vols disponibles :</p>
+        <!-- Section pour l'inscription aux vols -->
+        <h3>Inscription aux prochains vols</h3>
 
-        <!-- Formulaire d'inscription au vol -->
+        <!-- Ajouter les vols directement dans le tableau de bord -->
         <form action="inscription_vol.php" method="post">
             <label for="vol">Sélectionnez un vol :</label>
             <select name="vol" id="vol" required>
                 <option value="Perpignan-Lorient">Perpignan - Lorient</option>
                 <option value="Paris-Nice">Paris - Nice</option>
-                <!-- Ajoute d'autres vols ici -->
+                <!-- Ajoute ici d'autres vols disponibles -->
             </select>
             <br><br>
             <input type="submit" value="S'inscrire au vol">
@@ -55,7 +54,7 @@ if (!isset($_SESSION['username'])) {
         }
         ?>
     </section>
-    
+
     <footer>
         <p>© 2025 Transavia. Tous droits réservés.</p>
     </footer>
