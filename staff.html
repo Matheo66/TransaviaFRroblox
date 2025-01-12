@@ -7,27 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <header>
-        <h1>Connexion au Tableau de Bord du Staff</h1>
-    </header>
-
-    <!-- Formulaire de connexion -->
-    <section>
-        <form method="POST" action="login.php">
-            <label for="nom_utilisateur">Nom d'utilisateur :</label>
-            <input type="text" name="nom_utilisateur" id="nom_utilisateur" required><br>
-
-            <label for="mot_de_passe">Mot de passe :</label>
-            <input type="password" name="mot_de_passe" id="mot_de_passe" required><br>
-
-            <input type="submit" value="Se connecter">
-        </form>
-    </section>
-
-    <footer>
-        <p>© 2025 Transavia. Tous droits réservés.</p>
-    </footer>
-
+    <h2>Connexion à l'espace staff</h2>
+    <form action="login.php" method="POST">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" required><br>
+    
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required><br>
+    
+        <input type="submit" value="Se connecter">
+    </form>
+    
 </body>
 </html>

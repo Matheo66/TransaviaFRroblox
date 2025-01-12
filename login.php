@@ -1,55 +1,47 @@
 <?php
-// Configuration de la connexion à la base de données
-$servername = "localhost"; 
-$username = "root";        
-$password = "";            
-$dbname = "transavia";     
+// Connexion à la base de données
+$servername = "localhost";  // ou autre si tu utilises un autre serveur
+$username = "root";         // ton nom d'utilisateur MySQL
+$password = "";             // ton mot de passe MySQL (vide par défaut sous XAMPP)
+$dbname = "transavia";      // Nom de ta base de données
 
-session_start();
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les données envoyées par le formulaire
-    $nom_utilisateur = $_POST['nom_utilisateur'];
-    $mot_de_passe = $_POST['mot_de_passe'];
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("Connexion échouée : " . $conn->connect_error);
+}
 
-    // Connexion à la base de données
-    $conn = new mysqli($servername, $username, $password, $dbname);
+// Vérifier si les champs du formulaire existent
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    // Récupérer les données du formulaire
+    $nom_utilisateur = $_POST['username'];
+    $mot_de_passe = md5($_POST['password']);  // Hachage du mot de passe avec MD5
 
-    // Vérifier la connexion
-    if ($conn->connect_error) {
-        die("Échec de la connexion : " . $conn->connect_error);
-    }
-
-    // Préparer la requête SQL pour vérifier si l'utilisateur existe
-    $sql = "SELECT * FROM staff WHERE nom_utilisateur = '$nom_utilisateur'";
+    // Vérifier si les identifiants existent dans la base de données
+    $sql = "SELECT * FROM staff WHERE nom_utilisateur = '$nom_utilisateur' AND mot_de_passe = '$mot_de_passe'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // L'utilisateur existe, récupérer les données
+        // Connexion réussie, récupérer les infos de l'utilisateur
         $row = $result->fetch_assoc();
+        
+        // Démarrer la session et stocker les informations
+        session_start();
+        $_SESSION['username'] = $nom_utilisateur;
+        $_SESSION['nom'] = $row['nom'];
+        $_SESSION['prenom'] = $row['prenom'];
+        $_SESSION['rang'] = $row['rang'];
 
-        // Vérifier le mot de passe crypté
-        if (password_verify($mot_de_passe, $row['mot_de_passe'])) {
-            // Connexion réussie, enregistrer les informations dans la session
-            $_SESSION['user_id'] = $row['id']; 
-            $_SESSION['nom_utilisateur'] = $row['nom_utilisateur']; 
-            $_SESSION['nom'] = $row['nom']; 
-            $_SESSION['prenom'] = $row['prenom']; 
-            $_SESSION['rang'] = $row['rang']; 
-
-            // Rediriger vers la page du tableau de bord du staff
-            header("Location: staff_dashboard.php");
-            exit();
-        } else {
-            // Mot de passe incorrect
-            echo "Mot de passe incorrect.";
-        }
+        // Rediriger vers le tableau de bord staff
+        header("Location: staff_dashboard.php");
+        exit();
     } else {
-        // Utilisateur non trouvé
-        echo "Nom d'utilisateur non trouvé.";
+        echo "Nom d'utilisateur ou mot de passe incorrect.";
     }
-
-    // Fermer la connexion à la base de données
-    $conn->close();
+} else {
+    echo "Veuillez remplir les champs de connexion.";
 }
+
+$conn->close();
 ?>

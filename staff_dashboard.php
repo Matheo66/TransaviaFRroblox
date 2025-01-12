@@ -1,19 +1,10 @@
-
-<?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-?>
-
-
-
-
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-    header("Location: login.html");
-    exit;
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 ?>
 
@@ -22,33 +13,49 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord du Staff - TransaviaFRroblox</title>
+    <title>Tableau de bord - Staff</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Tableau de bord - Bienvenue, <?php echo $_SESSION['prenom']; ?> <?php echo $_SESSION['nom']; ?></h1>
+        <h1>Tableau de bord du Staff</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="vols.html">Prochains Vols</a></li>
+                <li><a href="logout.php">Déconnexion</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section>
-        <h2>Informations personnelles</h2>
-        <p><strong>Nom :</strong> <?php echo $_SESSION['prenom']; ?> <?php echo $_SESSION['nom']; ?></p>
-        <p><strong>Rang :</strong> <?php echo $_SESSION['rang']; ?></p>
+        <h2>Bienvenue, <?php echo $_SESSION['prenom'] . " " . $_SESSION['nom']; ?> !</h2>
+        <p>Rang : <?php echo $_SESSION['rang']; ?></p>
 
-        <h2>Inscription aux prochains vols</h2>
-        <p>Vous pouvez vous inscrire pour les prochains vols disponibles ci-dessous.</p>
+        <h3>Inscription aux vols</h3>
+        <p>Voici la liste des prochains vols disponibles :</p>
 
-        <!-- Liste des prochains vols -->
-        <div class="vol-container">
-            <button class="vol-btn">
-                <span class="destination">Perpignan - Lorient</span><br>
-                <span class="horaire">Départ : 17:00</span>
-            </button>
-            <a href="reservation.php?vol=1" class="btn-reserver">Réserver</a>
-        </div>
+        <!-- Formulaire d'inscription au vol -->
+        <form action="inscription_vol.php" method="post">
+            <label for="vol">Sélectionnez un vol :</label>
+            <select name="vol" id="vol" required>
+                <option value="Perpignan-Lorient">Perpignan - Lorient</option>
+                <option value="Paris-Nice">Paris - Nice</option>
+                <!-- Ajoute d'autres vols ici -->
+            </select>
+            <br><br>
+            <input type="submit" value="S'inscrire au vol">
+        </form>
 
+        <!-- Message de confirmation -->
+        <?php
+        if (isset($_SESSION['inscription_message'])) {
+            echo "<p>" . $_SESSION['inscription_message'] . "</p>";
+            unset($_SESSION['inscription_message']);
+        }
+        ?>
     </section>
-
+    
     <footer>
         <p>© 2025 Transavia. Tous droits réservés.</p>
     </footer>

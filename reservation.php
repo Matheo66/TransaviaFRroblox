@@ -1,5 +1,8 @@
+
+
+
 <?php
-session_start(); // Démarre la session
+session_start(); // Démarre la session au début du fichier
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['username'])) {
@@ -7,14 +10,34 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
+?>
 
-// Si le formulaire a été soumis, affiche le message de confirmation
-if (isset($_POST['confirm'])) {
-    $message = "Merci, votre réservation a bien été confirmée !";
+
+
+
+
+
+
+<?php
+session_start(); // Démarre la session
+
+// Vérifie si l'utilisateur est connecté
+if (isset($_SESSION['username'])) {
+    // Code pour afficher les informations du vol
+    echo "Bienvenue, " . $_SESSION['username'];
+    
+    // Si l'utilisateur clique sur "Confirmer la réservation"
+    if (isset($_POST['confirm'])) {
+        // Logique de confirmation de la réservation
+        echo "Réservation confirmée !";
+    }
 } else {
-    $message = "";
+    // Redirige vers la page de connexion si non connecté
+    header("Location: login.php");
+    exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
